@@ -207,6 +207,14 @@ pub struct Import {
 }
 
 #[derive(Debug, Clone)]
+pub struct Group {
+    pub name: String,
+    pub reference: Option<String>,
+    pub comment: Option<String>,
+    pub subtypes: Vec<RsEntity>,
+}
+
+#[derive(Debug, Clone)]
 pub enum RsEntity {
     Struct(Struct),
     StructField(StructField),
@@ -215,6 +223,7 @@ pub enum RsEntity {
     EnumCase(EnumCase),
     Alias(Alias),
     Import(Import),
+    Group(Group),
 }
 
 impl RsEntity {
@@ -228,6 +237,7 @@ impl RsEntity {
             Alias(al) => al.name.as_str(),
             StructField(sf) => sf.name.as_str(),
             Import(im) => im.name.as_str(),
+            Group(g) => g.name.as_str(),
         }
     }
 
@@ -241,6 +251,7 @@ impl RsEntity {
             Alias(al) => al.name = name.to_string(),
             StructField(sf) => sf.name = name.to_string(),
             Import(im) => im.name = name.to_string(),
+            Group(g) => g.name = name.to_string(),
         }
     }
 
@@ -254,6 +265,7 @@ impl RsEntity {
             Alias(al) => al.comment = comment,
             StructField(sf) => sf.comment = comment,
             Import(im) => im.comment = comment,
+            Group(g) => g.comment = comment,
         }
     }
 }

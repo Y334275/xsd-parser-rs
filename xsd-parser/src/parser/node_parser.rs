@@ -9,6 +9,7 @@ use crate::parser::complex_content::parse_complex_content;
 use crate::parser::complex_type::parse_complex_type;
 use crate::parser::element::parse_element;
 use crate::parser::extension::parse_extension;
+use crate::parser::group::parse_group;
 use crate::parser::import::parse_import;
 use crate::parser::list::parse_list;
 use crate::parser::restriction::parse_restriction;
@@ -32,6 +33,7 @@ pub fn parse_node(node: &Node, parent: &Node) -> RsEntity {
         ComplexType => parse_complex_type(node, parent),
         Element => parse_element(node, parent),
         Extension(_) => parse_extension(node, parent),
+        Group => parse_group(node, parent),
         Import | Include => parse_import(node),
         List => parse_list(node),
         Restriction(_) => parse_restriction(node, parent),
